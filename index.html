@@ -1,0 +1,26 @@
+<html>
+<head>
+    <title>Цитата Шерлока</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<img class="imgsherlok" src="sherlok.jpg">
+<div class="text" id="genText"></div>
+    <script>
+    const originalText = 'В этом мире не важно, сколько вы сделали. Самое главное — суметь убедить людей, что вы сделали много.';
+    const space = ' ';
+    const array = splitString(originalText, space);
+    let currentText = '';
+    let x = 0;
+
+    function splitString(stringToSplit, separator) {return stringToSplit.split(separator);}
+    setInterval(function() {
+    if (x < array.length) {
+    currentText += space + array[x];
+    document.getElementById('genText').innerHTML = currentText;
+    x++;} 
+    else {clearInterval();}}, 500);
+    </script>
+</body>
+</html>
