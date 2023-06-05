@@ -9,37 +9,30 @@
 </head>
 <body>
     <div class="container">
-    <div id="timer" class="chet">20</div>
-    <div class="text" id="Poleteli">Полетели!</div>
-    <div class="buttons">
-    <button id="startButton" class="btn btn-success">Запуск</button>
-    <button id="stopButton" class="btn btn-danger" onclick="stopCount()">Стоп</button>
+        <div class="text" id="Poleteli">Полетели!</div>
+        <button id="startButton" class="btn btn-success" onclick="startCount()">Пуск</button>
+        <div id="timer" style="font-size: 24px; color: red;"></div>
+        <script>
+            let seconds;
+            let timerElement = document.getElementById("timer");
+            let countdown;
+
+            function startCount() {
+                if (!seconds) {
+                seconds = prompt("Введите количество секунд");
+                timerElement.textContent = seconds;}
+
+                countdown = setInterval(function() {
+                if (seconds > 0) {seconds--;timerElement.textContent = seconds;}
+                 else {clearInterval(countdown);
+                timerElement.textContent = "Полетели!";}}, 1000);}
+            
+            function stopCount() {
+            clearInterval(countdown);}
+        </script>
+        <div class="buttons">
+        <button id="stopButton" class="btn btn-danger" onclick="stopCount()">Стоп</button>
+        </div>
     </div>
-    </div>
-<script>
-    let interval;
-    let count = localStorage.getItem('count') || 20;
-
-    function reverseCount() {
-    let timerElement = document.getElementById('timer');
-    let poleteliElement = document.getElementById('Poleteli');
-
-    interval = setInterval(function() {
-    if (count >= 0) {
-    timerElement.textContent = count;
-    count--;} 
-    else {clearInterval(interval);
-    poleteliElement.classList.add('show'); }}, 1000);}
-
-    function stopCount() {
-    clearInterval(interval);
-    let timerElement = document.getElementById('timer');
-    localStorage.setItem('count', timerElement.textContent);
-    count = timerElement.textContent;}
-
-    document.getElementById('startButton').addEventListener('click', reverseCount);
-    document.getElementById('stopButton').addEventListener('click', stopCount);
-    reverseCount(); 
-</script>
 </body>
 </html>
