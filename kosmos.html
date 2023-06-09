@@ -17,29 +17,46 @@
             let timerElement = document.getElementById("timer");
             let countdown;
 
-            if (seconds) {timerElement.textContent = seconds;
-            startCount();}
+            if (seconds) {
+                timerElement.textContent = seconds;
+                startCount();
+            }
 
             function startCount() {
             if (!seconds) {
             seconds = prompt("Введите количество секунд");
             timerElement.textContent = seconds;
-            localStorage.setItem("timerSeconds", seconds);}
+            localStorage.setItem("timerSeconds", seconds);
+            }
 
             clearInterval(countdown);
 
             countdown = setInterval(function() {
-            if (seconds > 0) {seconds--;
-            timerElement.textContent = seconds;
-            localStorage.setItem("timerSeconds", seconds);} 
-            else {clearInterval(countdown);
-            countdown = setInterval(() => {seconds = seconds - 1;
-            if (seconds < 1) {clearInterval(countdown);}}, 1000);
-            timerElement.textContent = "Полетели!";
-            localStorage.removeItem("timerSeconds");}}, 1000);}
+            if (seconds > 0) {
+                seconds--;
+                timerElement.textContent = seconds;
+                localStorage.setItem("timerSeconds", seconds);
+            } else {
+                clearInterval(countdown);
+                countdown = setInterval(() => {
+                seconds = seconds - 1;
 
-            function stopCount() {clearInterval(countdown);
-            localStorage.removeItem("timerSeconds");}
+            if (seconds < 1) {
+                clearInterval(countdown);
+                }
+
+            }, 1000);
+
+            timerElement.textContent = "Полетели!";
+            localStorage.removeItem("timerSeconds");
+                }
+            }, 1000);
+            }
+
+            function stopCount() {
+                clearInterval(countdown);
+                localStorage.removeItem("timerSeconds");
+            }
         </script>
         <div class="buttons">
         <button id="stopButton" class="btn btn-danger" onclick="stopCount()">Стоп</button>
